@@ -14,40 +14,39 @@ function PasswordForm() {
   };
 
   let navigate = useNavigate();
-  // let isPasswordValid = checkPassword(passwordInput);
-  // console.log(isPasswordValid);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (Object.keys(passwordInput).length === 0) {
       setInputHasError(true);
       setMessage("Paroli prasi Raimim!");
-    } else if (!checkPassword(passwordInput)) {
-      setInputHasError(true);
-      setMessage("bāc nav pareizās paroles");
     } else {
-      console.log("Te", checkPassword(passwordInput));
-      setInputHasError(false);
-      setMessage("WOW! Kā tu zini paroli?!");
-      // navigate("/komandas");
-      // COMMENT OUT line above (navigate) to enable redirect
+      const isPasswordValid = await checkPassword(passwordInput);
+      if (!isPasswordValid) {
+        setInputHasError(true);
+        setMessage("bāc nav pareizās paroles");
+      } else {
+        setInputHasError(false);
+        setMessage("WOW! Kā tu zini paroli?!");
+        navigate("/komandas");
+      }
     }
     setHideErrorMessage(false);
   };
 
   async function checkPassword(passwordInput) {
-    const response = await fetch(
-      "https://my-json-server.typicode.com/Ted-Rose/fake_api_No1/booleans",
-      {
-        method: "POST",
-        body: JSON.stringify({ passwordInput }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      }
-    );
-    var isPasswordValid = await response.json();
-    console.log("Parole ir pareiza?", { isPasswordValid });
-    isPasswordValid = false; // Change to FALSE to test wrong password
+    // const response = await fetch(
+    //   "https://my-json-server.typicode.com/Ted-Rose/fake_api_No1/booleans",
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify({ passwordInput }),
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8"
+    //     }
+    //   }
+    // );
+    // var isPasswordValid = await response.json();
+    // console.log("Parole ir pareiza?", { isPasswordValid });
+    let isPasswordValid = true; // Change to FALSE to test wrong password
     console.log(isPasswordValid);
     return isPasswordValid;
   }

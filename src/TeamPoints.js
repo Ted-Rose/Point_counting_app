@@ -15,12 +15,12 @@ const TeamPoints = () => {
   }, []);
 
   const changePoints = (pointChange) => {
-    fetch("https://my-json-server.typicode.com/Ted-Rose/json/teams", {
+    fetch("https://my-json-server.typicode.com/Ted-Rose/fake_api_No1/teams", {
       method: "POST",
       body: JSON.stringify({ selectedTeamId, pointChange }),
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -34,7 +34,7 @@ const TeamPoints = () => {
   };
 
   const GetNewPoints = () => {
-    fetch("https://my-json-server.typicode.com/Ted-Rose/json/teams")
+    fetch("https://my-json-server.typicode.com/Ted-Rose/fake_api_No1/teams")
       .then((response) => {
         return response.json();
       })
