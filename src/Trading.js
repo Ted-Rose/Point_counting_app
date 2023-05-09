@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./Trading.css";
 import Navbar from "./Navbar";
+import Nfc from "./Nfc";
+import NfcScan from "./NfcScan";
 
 const Trading = () => {
   const [player, setPlayer] = useState([
     {
       id: 1,
       name: "Laima Bedrīte",
-      pointCount: 3
-    }
+      pointCount: 3,
+    },
   ]);
   // This state will be changed to "" when correct API
   // will be implemented. For now there are problems
@@ -24,8 +26,8 @@ const Trading = () => {
       method: "POST",
       body: JSON.stringify({ playerId, pointChange }),
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -57,8 +59,10 @@ const Trading = () => {
             <button className="w-50 btn btn-med btn-primary" id="scanButton">
               Skenēt
             </button>
+            {/* <NfcScan></NfcScan> */}
             <h2>{player[0].name}</h2>
             <h3>{player[0].pointCount} punkti</h3>
+
             <div className="btn-group-lg center">
               <button
                 type="button"
